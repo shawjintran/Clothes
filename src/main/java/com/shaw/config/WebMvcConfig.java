@@ -12,6 +12,8 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+//丝袜哥地址:
+//http://localhost:8080/doc.html#/home
 @Configuration
 @EnableKnife4j
 public class WebMvcConfig extends WebMvcConfigurationSupport {

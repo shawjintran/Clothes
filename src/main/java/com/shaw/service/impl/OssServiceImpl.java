@@ -4,10 +4,12 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.shaw.service.OssService;
 import com.shaw.utils.ConstantPropertiesUtils;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.UUID;
 
 @Service
 public class OssServiceImpl implements OssService {
@@ -33,6 +35,16 @@ public class OssServiceImpl implements OssService {
 
             //获取文件名称
             String fileName = file.getOriginalFilename();
+
+            //uuid,替换
+            String uuid = UUID.randomUUID().toString().replace("_","");
+            //拼接:
+            fileName = uuid+fileName;
+
+            //文件按照日期分类
+            String datePath = new DateTime().toString("yyyy/MM/dd");
+            //拼接
+            fileName=datePath+fileName;//2022/11/22/12dew313dqe.jpg
             //调用oss方法实现上传
             //第一个参数 Bucket名称
             //第二个参数 上传到oss文件路径和文件名称
