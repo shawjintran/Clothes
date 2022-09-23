@@ -14,9 +14,10 @@ public class CommonController {
 	@PostMapping("/upload/{id}")
 	public void upload(@PathVariable String id, MultipartFile file){
 
+
 	}
-	@GetMapping("/download/{id}")
-	public void download(@PathVariable String id, HttpServletResponse response){
+	@GetMapping("/download/{url}")
+	public void download(@PathVariable String url, HttpServletResponse response){
 
 	}
 }

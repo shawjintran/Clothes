@@ -20,4 +20,5 @@
         user_id,url,is_deleted,
         gmt_create,gmt_modified
     </sql>
+
 </mapper>

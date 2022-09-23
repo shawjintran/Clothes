@@ -1,7 +1,12 @@
 package com.shaw.controller;
 
 import com.shaw.pojo.Blog;
+import com.shaw.pojo.R;
+import com.shaw.service.BlogService;
+import com.shaw.service.impl.BlogServiceImpl;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,23 +14,40 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/blog")
 public class BlogController {
-	@GetMapping("/list/{userid}")
-	public void list(@PathVariable String userid){
 
+	@Autowired
+	private BlogServiceImpl blogService;
+
+	@GetMapping("/list/{userid}")
+	@ApiOperation("展示当前用户的全部文章")
+	public R list(@PathVariable String userid){
+		return R.ok().data("articlelist",blogService.list(userid));
 	}
 	@PostMapping("/save")
-	public void save(@RequestBody Blog blog){}
+	@ApiOperation("保存文章")
+	public R save(@RequestBody Blog blog){
+		blogService.save(blog);
+		return R.ok();
+	}
 	@PostMapping("/edit")
-	public void edit(@RequestBody Blog blog){}
+	@ApiOperation("编辑指定id更改文章")
+	public R edit(@RequestBody Blog blog){
+		blogService.updateById(blog);
+		return R.ok();
+	}
 	@DeleteMapping("/delete/{id}")
-	public void delete(@PathVariable String id){
-
+	@ApiOperation("删除指定id的文章")
+	public R delete(@PathVariable String id){
+		blogService.removeById(id);
+		return R.ok();
 	}
 	@PutMapping("/flavor")
+	@ApiOperation("展示用户喜欢的文章")
 	public void flavor(){
 
 	}
 	@PutMapping("/comment")
+	@ApiOperation("展示文章下面的所有评论")
 	public void comment(){
 
 	}
