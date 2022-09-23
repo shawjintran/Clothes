@@ -1,7 +1,11 @@
 package com.shaw.controller;
 
 import com.shaw.pojo.Clothes;
+import com.shaw.pojo.R;
+import com.shaw.service.impl.ClothesServiceImpl;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -9,22 +13,29 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/clothes")
 public class ClothesController {
 
-	@PostMapping("/save")
-	public void save(@RequestBody Clothes clothes){
+	@Autowired
+	private ClothesServiceImpl clothesService;
 
+	@PostMapping("/save")
+	public R save(@RequestBody Clothes clothes){
+		clothesService.save(clothes);
+		return R.ok();
 	}
 
 	@PostMapping("/update")
-	public void update(@RequestBody Clothes clothes){
-
+	public R update(@RequestBody Clothes clothes){
+		clothesService.updateById(clothes);
+		return R.ok();
 	}
 	@GetMapping("/list/{userid}/{type}")
-	public void list(@PathVariable String userid, @PathVariable String type){
-
+	@ApiOperation("将获取的衣服数据list，封装到R中，进行返回，以'list'作为key值")
+	public R list(@PathVariable String userid, @PathVariable String type){
+		return R.ok().data("clotheslist",clothesService.list(userid,type));
 	}
 
-	@DeleteMapping("/delete/{name}")
-	public void delete(@PathVariable String name){
-
+	@DeleteMapping("/delete/{id}")
+	public R delete(@PathVariable String id){
+		clothesService.removeById(id);
+		return R.ok();
 	}
 }
