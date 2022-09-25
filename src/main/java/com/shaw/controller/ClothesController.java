@@ -1,8 +1,8 @@
 package com.shaw.controller;
 
 import com.shaw.pojo.Clothes;
-import com.shaw.pojo.R;
 import com.shaw.service.impl.ClothesServiceImpl;
+import com.shaw.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
